@@ -216,6 +216,23 @@ namespace AutoShop.ClassesDB
             }
         }
 
+        public void AddManager(DataRow m, DataRow a)
+        {
+            try
+            {
+                _dataSet.Tables["Managers"].Rows.Add(m);
+                _adapterManagers.Update(_dataSet, "Managers");
+                _dataSet.Tables["Access"].Rows.Add(a);
+                _adapterManagersLevels.Update(_dataSet, "Access");
+                UpdateAllDataSet();
+                MessageBox.Show("Менеджер додан!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public void AddWork(DataRow row)
         {
             try

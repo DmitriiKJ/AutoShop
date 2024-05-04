@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,11 +23,44 @@ namespace AutoShop.Forms
     public partial class HireWindow : Window
     {
         AutoShopDB AutoShop;
+        private PasswordBox _pb;
+        private TextBox _tb;
+        private Border border = new Border();
+
         public HireWindow(AutoShopDB db)
         {
+            // PasswodBox
+            _pb = new PasswordBox();
+            _pb.Margin = new Thickness(5);
+            _pb.PasswordChar = '●';
+            _pb.Background = (Brush)Application.Current.TryFindResource("enable");
+            _pb.BorderThickness = new Thickness(0);
+
+            // TextPasswordBox
+            _tb = new TextBox();
+            _tb.Width = 250;
+            _tb.Height = 25;
+            _tb.Margin = new Thickness(5);
+            Style myElementStyle = Application.Current.FindResource("textBox") as Style;
+            _tb.Style = myElementStyle;
+            _tb.IsEnabled = true;
+
+            // Binding text and password
+            _tb.TextChanged += TextBox_TextChanged;
+            _pb.PasswordChanged += PasswordBox_PasswordChanged;
+
+            border.Background = _pb.IsEnabled ? (Brush)Application.Current.TryFindResource("enable") : (Brush)Application.Current.TryFindResource("disable");
+            border.CornerRadius = new CornerRadius(10);
+            border.Width = 250;
+            border.Height = 25;
+            border.Child = _pb;
+            border.Margin = new Thickness(5);
+
             InitializeComponent();
             AutoShop = db;
             newAdd.Checked += new_Checked;
+            date.DisplayDateEnd = DateTime.Now.AddYears(-18);
+            date.DisplayDateStart = DateTime.Now.AddYears(-100);
 
             try
             {
@@ -59,17 +93,49 @@ namespace AutoShop.Forms
             }
         }
 
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            PasswordBoxAssistant.SetBoundPassword(_pb, _tb.Text);
+            MoveCursorToEnd(_pb);
+            TextChanged(null, null);
+        }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            PasswordBoxAssistant.SetBoundPassword(_pb, (sender as PasswordBox).Password);
+            _tb.Text = PasswordBoxAssistant.GetBoundPassword(_pb);
+            TextChanged(null, null);
+        }
+
+        private void MoveCursorToEnd(PasswordBox pb)
+        {
+            pb.GetType().GetMethod("Select", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic)
+                .Invoke(pb, new object[] { pb.Password.Length, 0 });
+        }
+
         private void new_Checked(object sender, RoutedEventArgs e)
         {
             newEmployee.IsEnabled = true;
             restore.SelectedIndex = -1;
             restore.IsEnabled = false;
+            _pb.IsEnabled = true;
+            _pb.Background = (Brush)Application.Current.TryFindResource("enable");
+            border.Background = _pb.IsEnabled ? (Brush)Application.Current.TryFindResource("enable") : (Brush)Application.Current.TryFindResource("disable");
+            _tb.IsEnabled = true;
+
+            TextChanged(null, null);
         }
 
         private void old_Ckecked(object sender, RoutedEventArgs e)
         {
             newEmployee.IsEnabled = false;
             restore.IsEnabled = true;
+            _pb.IsEnabled = false;
+            _pb.Background = (Brush)Application.Current.TryFindResource("disable");
+            border.Background = _pb.IsEnabled ? (Brush)Application.Current.TryFindResource("enable") : (Brush)Application.Current.TryFindResource("disable");
+            _tb.IsEnabled = false;
+
+            SelectionChanged(null, null);
         }
 
         private void hire_Click(object sender, RoutedEventArgs e)
@@ -95,6 +161,73 @@ namespace AutoShop.Forms
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void visiblePassword_Checked(object sender, RoutedEventArgs e)
+        {
+            Path path = new Path();
+            path.Data = Geometry.Parse("M 20,20 C 25,10 35,10 40,20 C 35,30 25,30 20,20 Z");
+            path.Fill = Brushes.White;
+            path.Stroke = Brushes.Black;
+            path.StrokeThickness = 1;
+
+            Ellipse ellipse = new Ellipse();
+            ellipse.Width = 10;
+            ellipse.Height = 10;
+            ellipse.Fill = Brushes.Black;
+            ellipse.Margin = new Thickness(20, 2, 0, 0);
+
+            eye.Children.Clear();
+            eye.Children.Add(path);
+            eye.Children.Add(ellipse);
+
+            passwordGrid.Children.Clear();
+            passwordGrid.Children.Add(_tb);
+        }
+
+        private void visiblePassword_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Path path = new Path();
+            path.Data = Geometry.Parse("M 20,20 C 25,10 35,10 40,20 C 35,30 25,30 20,20 Z");
+            path.Fill = Brushes.White;
+            path.Stroke = Brushes.Black;
+            path.StrokeThickness = 1;
+
+            Line line = new Line();
+            line.X1 = 20;
+            line.Y1 = 20;
+            line.X2 = 40;
+            line.Y2 = 20;
+            line.Stroke = Brushes.Black;
+            line.StrokeThickness = 1;
+
+            eye.Children.Clear();
+            eye.Children.Add(path);
+            eye.Children.Add(line);
+
+            passwordGrid.Children.Clear();
+            passwordGrid.Children.Add(border);
+        }
+
+        private void TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (newAdd.IsChecked == true)
+            {
+                if (!string.IsNullOrWhiteSpace(first.Text) && !string.IsNullOrWhiteSpace(last.Text) && !string.IsNullOrWhiteSpace(middle.Text) && !string.IsNullOrWhiteSpace(phoneNumber.Text) && !string.IsNullOrWhiteSpace(login.Text) && !string.IsNullOrWhiteSpace(_tb.Text) && date.SelectedDate != null)
+                {
+                    hire.IsEnabled = true;
+                }
+                else hire.IsEnabled = false;
+            }
+        }
+
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (restore.SelectedIndex != -1 && restore.SelectedItem.ToString() != "Нема звільнених менеджерів")
+            {
+                hire.IsEnabled = true;
+            }
+            else hire.IsEnabled = false;
         }
     }
 }
