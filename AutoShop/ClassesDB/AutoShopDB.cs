@@ -259,6 +259,20 @@ namespace AutoShop.ClassesDB
             }
         }
 
+        public void RestoreManager(DataRow row)
+        {
+            try
+            {
+                row["isFired"] = false;
+                _adapterManagers.Update(_dataSet, "Managers");
+                MessageBox.Show("Менеджера відновлено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public void ChangePassword(string newPassword, string login)
         {
             DataRow tmp = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == login);
