@@ -103,7 +103,8 @@ namespace AutoShop.Forms
 
         private void hire_Click(object sender, RoutedEventArgs e)
         {
-
+            HireWindow hire = new HireWindow(AutoShop);
+            hire.ShowDialog();
         }
 
         private void fire_Click(object sender, RoutedEventArgs e)

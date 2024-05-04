@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoShop.ClassesDB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,25 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class HireWindow : Window
     {
-        public HireWindow()
+        AutoShopDB AutoShop;
+        public HireWindow(AutoShopDB db)
         {
             InitializeComponent();
+            AutoShop = db;
+            newAdd.Checked += new_Checked;
+        }
+
+        private void new_Checked(object sender, RoutedEventArgs e)
+        {
+            newEmployee.IsEnabled = true;
+            restore.SelectedIndex = -1;
+            restore.IsEnabled = false;
+        }
+
+        private void old_Ckecked(object sender, RoutedEventArgs e)
+        {
+            newEmployee.IsEnabled = false;
+            restore.IsEnabled = true;
         }
     }
 }

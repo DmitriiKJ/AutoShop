@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="HireWindow" Height="450" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
     <StackPanel>
-        <RadioButton Content="Найняти нового менеджера" Foreground="{DynamicResource text}" FontSize="20" VerticalContentAlignment="Center" Margin="5"/>
-        <Grid>
+        <RadioButton x:Name="newAdd" Content="Найняти нового менеджера" Foreground="{DynamicResource text}" FontSize="20" VerticalContentAlignment="Center" Margin="5" IsChecked="True"/>
+        <Grid x:Name="newEmployee">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -52,5 +52,24 @@
             <TextBox x:Name="password" Grid.Column="3" Grid.Row="3" Style="{DynamicResource textBox}" Margin="10"/>
 
         </Grid>
+
+        <Separator BorderBrush="{DynamicResource text}">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3"/>
+            </Separator.RenderTransform>
+        </Separator>
+
+        <RadioButton Content="Повернути менеджера" Foreground="{DynamicResource text}" FontSize="20" VerticalContentAlignment="Center" Margin="5" Checked="old_Ckecked"/>
+
+        <ComboBox x:Name="restore" Margin="10" Style="{DynamicResource comboBox}" Width="300" Height="30" IsEnabled="False"/>
+
+        <Separator BorderBrush="{DynamicResource text}">
+            <Separator.RenderTransform>
+                <ScaleTransform ScaleY="3"/>
+            </Separator.RenderTransform>
+        </Separator>
+
+        <Button x:Name="hire" Content="Найняти" Margin="10" Width="200" Height="40" Style="{DynamicResource btn}"/>
+
     </StackPanel>
 </Window>

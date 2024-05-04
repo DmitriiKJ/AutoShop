@@ -99,7 +99,7 @@
                                                     <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
                                                 <Border x:Name="Border"  Grid.ColumnSpan="2" CornerRadius="10" Background="{DynamicResource disable}" BorderBrush="Black" BorderThickness="1" />
-                                                <Border Grid.Column="0" CornerRadius="10,0,0,10"  Margin="1"  Background="{DynamicResource enable}"  BorderBrush="Black" BorderThickness="0,0,1,0" />
+                                                <Border x:Name="Item" Grid.Column="0" CornerRadius="10,0,0,10"  Margin="1"  Background="{DynamicResource enable}"  BorderBrush="Black" BorderThickness="0,0,1,0" />
                                                 <Path x:Name="Arrow" Grid.Column="1" Fill="{DynamicResource text}" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z"/>
                                             </Grid>
                                             <ControlTemplate.Triggers>
@@ -108,6 +108,10 @@
                                                 </Trigger>
                                                 <Trigger Property="ToggleButton.IsChecked" Value="true">
                                                     <Setter TargetName="Border" Property="Background" Value="{DynamicResource over}" />
+                                                </Trigger>
+
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter TargetName="Item" Property="Background" Value="{DynamicResource disable}"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
