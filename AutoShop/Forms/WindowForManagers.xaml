@@ -1,0 +1,53 @@
+﻿<Window x:Class="AutoShop.Forms.WindowForManagers"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        Title="WindowForManagers" Height="700" Width="1200" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" WindowState="Maximized">
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Orientation="Horizontal">
+
+            <StackPanel>
+                <StackPanel Background="{DynamicResource enable}" Width="500" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                    <TextBlock x:Name="loginCurrent" HorizontalAlignment="Center" Margin="5" FontSize="24"/>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Text="Працює зараз:" VerticalAlignment="Center" FontSize="24" Margin="3"/>
+                        <CheckBox x:Name="isWorking" Margin="10 10 0 0">
+                            <CheckBox.LayoutTransform>
+                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                            </CheckBox.LayoutTransform>
+                        </CheckBox>
+                    </StackPanel>
+
+                    <Button x:Name="changePassword" Content="Змінити пароль" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changePassword_Click" Margin="20"/>
+
+                </StackPanel>
+
+                <Button x:Name="sellCar" Style="{DynamicResource btn}" Width="370" Height="70" Content="Продати машину" Margin="70 20" FontSize="30" Click="sellCar_Click"/>
+
+                <Button x:Name="hire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Найняти робітника" Margin="70 20" FontSize="30" Click="hire_Click" IsEnabled="False"/>
+
+                <Button x:Name="fire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Звільнити робітника" Margin="70 20" FontSize="30" Click="fire_Click" IsEnabled="False"/>
+
+                <Button x:Name="changePasswordForEmployee" Style="{DynamicResource btn}" Width="370" Height="70" Content="Змінити пароль робітника" Margin="70 20" FontSize="30" Click="changePasswordForEmployee_Click" IsEnabled="False"/>
+
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="Список проданих автомобілів" Margin="20" FontSize="26" HorizontalAlignment="Center" Foreground="{DynamicResource text}"/>
+                <DataGrid x:Name="listSells" FontSize="26" Width="500" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto">
+                </DataGrid>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,38 @@
+﻿<Window x:Class="AutoShop.Forms.AddCar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        Title="AddCar" Height="300" Width="700" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" ResizeMode="NoResize">
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Margin="0 30 0 0">
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
+                <TextBlock Text="Модель: " FontSize="20" Foreground="{DynamicResource text}"/>
+                <ComboBox x:Name="model" Style="{DynamicResource comboBox}" Width="300" VerticalAlignment="Center" Margin="3" SelectionChanged="model_SelectionChanged"/>
+                <Button x:Name="addModel" Content="Нова модель" Width="170" Style="{DynamicResource btn}" Margin="10 0 0 0" Click="addModel_Click"/>
+            </StackPanel>
+
+            <DockPanel HorizontalAlignment="Left" Width="230" Margin="60 20">
+                <TextBlock Text="Рік: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                <TextBox x:Name="numeric" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Text="" Width="50" Height="30" Background="{DynamicResource enable}" Margin="20 0"/>
+                <StackPanel Orientation="Horizontal" Margin="-50 0 0 0" Width="80">
+                    <Button x:Name="up" Content="+1" Width="30" Height="20" Margin="10 0" Click="up_Click" Style="{DynamicResource btn}"/>
+                    <Button x:Name="down" Content="-1" Width="30" Height="20" Click="down_Click" Style="{DynamicResource btn}"/>
+                </StackPanel>
+            </DockPanel>
+        </StackPanel>
+
+        <Button x:Name="add" Content="Додати" HorizontalAlignment="Center" Style="{DynamicResource btn}" Width="100" Height="30" Click="add_Click" IsEnabled="False"/>
+
+    </StackPanel>
+</Window>

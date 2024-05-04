@@ -1,0 +1,48 @@
+﻿<Window x:Class="AutoShop.Forms.AddClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        Title="AddClient" Height="500" Width="510" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" ResizeMode="NoResize">
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+        
+        <StackPanel Margin="0 40 0 0">
+
+            <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
+                <TextBlock Text="Ім'я: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                <TextBox x:Name="firstName" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+            </DockPanel>
+
+            <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
+                <TextBlock Text="Прізвище: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                <TextBox x:Name="lastName" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+            </DockPanel>
+
+            <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
+                <TextBlock Text="Побатькові: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                <TextBox x:Name="middleName" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+            </DockPanel>
+
+            <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
+                <TextBlock Text="Номер: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                <TextBox x:Name="phoneNumber" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+            </DockPanel>
+
+            <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
+                <TextBlock Text="Адреса: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                <TextBox x:Name="address" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+            </DockPanel>
+
+            <Button Style="{DynamicResource btn}" Content="Додати" x:Name="addClient" Margin="20" Width="130" Height="45" Click="addClient_Click" IsEnabled="False"/>
+
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -1,0 +1,25 @@
+﻿<Window x:Class="AutoShop.Forms.FireWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        Title="FireWindow" Height="250" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 30 10 10">
+            <TextBlock VerticalAlignment="Center" Text="Логін: " Margin="5" Height="20" Foreground="{DynamicResource text}"/>
+            <ComboBox Name="login" Width="Auto" MinWidth="250" Margin="5" SelectionChanged="login_SelectionChanged" Height="25" Style="{DynamicResource comboBox}"/>
+        </StackPanel>
+
+        <Button x:Name="fire" Click="fire_Click" Width="150" Height="40" Margin="20" Style="{DynamicResource btn}" IsEnabled="False">Звільнити</Button>
+        
+    </StackPanel>
+</Window>

@@ -1,0 +1,27 @@
+﻿<Window x:Class="AutoShop.Forms.AddBrand"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        Title="AddBrand" Height="300" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+
+        <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
+            <TextBlock Text="Назва бренду: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+            <TextBox x:Name="brandName" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+        </DockPanel>
+
+        <TextBlock Text="Інформація (необов'язково): " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Center"/>
+        <TextBox x:Name="info" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Center" TextWrapping="Wrap" Height="100"/>
+
+        <Button Style="{DynamicResource btn}" Content="Додати" x:Name="addBrand" Margin="20" Width="130" Height="45" Click="addBrand_Click" IsEnabled="False"/>
+    </StackPanel>
+</Window>
