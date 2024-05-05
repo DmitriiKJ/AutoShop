@@ -1,4 +1,5 @@
-﻿using AutoShop.ClassesDB;
+﻿using AutoShop.AdditionalClasses;
+using AutoShop.ClassesDB;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -144,7 +145,29 @@ namespace AutoShop.Forms
             {
                 if (newAdd.IsChecked == true)
                 {
+                    if (Password.ValidatePassword(_tb.Text))
+                    {
 
+                        DataRow manager = AutoShop._dataSet.Tables["Managers"].NewRow();
+                        DataRow access = AutoShop._dataSet.Tables["Access"].NewRow();
+
+                        manager["FirstName"] = first.Text;
+                        manager["LastName"] = last.Text;
+                        manager["MiddleName"] = middle.Text;
+                        manager["Birthday"] = date.DisplayDate;
+                        manager["Experience"] = 0;
+                        manager["PhoneNumber"] = phoneNumber.Text;
+
+                        access["Login"] = login.Text;
+                        access["Password"] = _tb.Text;
+                        access["Level"] = isMainManager.IsChecked;
+
+                        AutoShop.AddManager(manager, access);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Пароль має складатися не менше ніж з 8 символів та містити великі літери, малі, спецсимволи! Також він може мати цифри та не може мати пробілів.");
+                    }
                 }
                 else
                 {

@@ -220,10 +220,30 @@ namespace AutoShop.ClassesDB
         {
             try
             {
-                _dataSet.Tables["Managers"].Rows.Add(m);
-                _adapterManagers.Update(_dataSet, "Managers");
-                _dataSet.Tables["Access"].Rows.Add(a);
-                _adapterManagersLevels.Update(_dataSet, "Access");
+                using (SqlConnection connection = new SqlConnection(_connectionString))
+                {
+                    string query = "SELECT IDENT_CURRENT('Access') + 1 AS NextSalt";
+                    SqlCommand command = new SqlCommand(query, connection);
+
+                    connection.Open();
+
+                    int nextSalt = Convert.ToInt32(command.ExecuteScalar());
+
+                    command = new SqlCommand("CreateManager", connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@FirstName", m["FirstName"]);
+                    command.Parameters.AddWithValue("@MiddleName", m["MiddleName"]);
+                    command.Parameters.AddWithValue("@LastName", m["LastName"]);
+                    command.Parameters.AddWithValue("@PhoneNumber", m["PhoneNumber"]);
+                    command.Parameters.AddWithValue("@Birthday", m["Birthday"]);
+                    command.Parameters.AddWithValue("@Login", a["Login"]);
+                    command.Parameters.AddWithValue("@Password", Password.SHA1(a["Password"] + nextSalt.ToString()));
+                    command.Parameters.AddWithValue("@Level", a["Level"]);
+
+                    command.ExecuteNonQuery();
+                }
+
                 UpdateAllDataSet();
                 MessageBox.Show("Менеджер додан!");
             }

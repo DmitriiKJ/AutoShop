@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
-        Title="AddBrand" Height="300" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+        Title="AddBrand" Height="350" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
     <StackPanel>
         <Menu>
             <MenuItem Header="Тема">
