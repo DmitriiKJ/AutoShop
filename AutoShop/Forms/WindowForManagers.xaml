@@ -36,6 +36,8 @@
 
                 <Button x:Name="sellCar" Style="{DynamicResource btn}" Width="370" Height="70" Content="Продати машину" Margin="70 20" FontSize="30" Click="sellCar_Click"/>
 
+                <Button x:Name="showSchedule" Style="{DynamicResource btn}" Width="370" Height="70" Content="Подивитися графік роботи" Margin="70 20" FontSize="30" Click="showSchedule_Click"/>
+
                 <Button x:Name="hire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Найняти робітника" Margin="70 20" FontSize="30" Click="hire_Click" IsEnabled="False"/>
 
                 <Button x:Name="fire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Звільнити робітника" Margin="70 20" FontSize="30" Click="fire_Click" IsEnabled="False"/>

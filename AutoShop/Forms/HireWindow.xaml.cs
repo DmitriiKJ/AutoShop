@@ -163,6 +163,7 @@ namespace AutoShop.Forms
                         access["Level"] = isMainManager.IsChecked;
 
                         AutoShop.AddManager(manager, access);
+                        Close();
                     }
                     else
                     {

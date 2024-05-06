@@ -260,7 +260,6 @@ namespace AutoShop.ClassesDB
                 _dataSet.Tables["WorkHistory"].Rows.Add(row);
                 _adapterHistory.Update(_dataSet, "WorkHistory");
                 UpdateAllDataSet();
-                MessageBox.Show("");
             }
             catch (Exception ex)
             {

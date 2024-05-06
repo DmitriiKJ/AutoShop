@@ -39,22 +39,19 @@ namespace AutoShop.Forms
                 changePasswordForEmployee.IsEnabled = true;
             }
 
-            //IsWorking.Checked -= IsWorking_Checked;
-            //IsWorking.Unchecked -= IsWorking_Unchecked;
+            DataRow tmp = AutoShop._dataSet.Tables["WorkHistory"].AsEnumerable().FirstOrDefault(h => h.Field<DateTime?>("EndTime") == null && h.Field<int>("ManagerId") == AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == login).Field<int>("ManagerId"));
 
-            //DataRow tmp = AutoShop._dataSet.Tables["WorkHistory"].AsEnumerable().FirstOrDefault(h => h.Field<DateTime?>("EndTime") == null && h.Field<int>("ManagerId") == AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == login).Field<int>("ManagerId"));
+            if (tmp != null)
+            {
+                isWorking.IsChecked = true;
+            }
+            else
+            {
+                isWorking.IsChecked = false;
+            }
 
-            //if(tmp != null)
-            //{
-            //    IsWorking.IsChecked = true;
-            //}
-            //else
-            //{
-            //    IsWorking.IsChecked = false;
-            //}
-
-            //IsWorking.Checked += IsWorking_Checked;
-            //IsWorking.Unchecked += IsWorking_Unchecked;
+            isWorking.Checked += IsWorking_Checked;
+            isWorking.Unchecked += IsWorking_Unchecked;
         }
 
         private void ShowSellCars()
@@ -120,29 +117,35 @@ namespace AutoShop.Forms
 
         }
 
-        //private void IsWorking_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    DataRow row = AutoShop._dataSet.Tables["WorkHistory"].NewRow();
-        //    row["ManagerId"] = AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == LoginCurrent.Text).Field<int>("ManagerId");
-        //    row["StartTime"] = DateTime.Now;
-        //    row["EndTime"] = DBNull.Value;
-        //    AutoShop.AddWork(row);
-        //}
+        private void IsWorking_Checked(object sender, RoutedEventArgs e)
+        {
+            DataRow row = AutoShop._dataSet.Tables["WorkHistory"].NewRow();
+            row["ManagerId"] = AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == loginCurrent.Text).Field<int>("ManagerId");
+            row["StartTime"] = DateTime.Now;
+            row["EndTime"] = DBNull.Value;
+            AutoShop.AddWork(row);
+        }
 
-        //private void IsWorking_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    int id = AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == LoginCurrent.Text).Field<int>("ManagerId");
+        private void IsWorking_Unchecked(object sender, RoutedEventArgs e)
+        {
+            int id = AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == loginCurrent.Text).Field<int>("ManagerId");
 
-        //    DataRow row = AutoShop._dataSet.Tables["WorkHistory"].AsEnumerable().FirstOrDefault(h => h.Field<DateTime?>("EndTime") == null && h.Field<int>("ManagerId") == id);
+            DataRow row = AutoShop._dataSet.Tables["WorkHistory"].AsEnumerable().FirstOrDefault(h => h.Field<DateTime?>("EndTime") == null && h.Field<int>("ManagerId") == id);
 
-        //    if(row != null)
-        //    {
-        //        AutoShop.UpdateWork(row);
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Цей працівник не працює!");
-        //    }
-        //}
+            if (row != null)
+            {
+                AutoShop.UpdateWork(row);
+            }
+            else
+            {
+                MessageBox.Show("Цей працівник не працює!");
+            }
+        }
+
+        private void showSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            Schedule schedule = new Schedule(AutoShop, loginCurrent.Text);
+            schedule.ShowDialog();
+        }
     }
 }

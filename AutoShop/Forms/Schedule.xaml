@@ -1,0 +1,13 @@
+﻿<Window x:Class="AutoShop.Forms.Schedule"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        Title="Schedule" Height="450" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+    <StackPanel>
+        <TextBlock x:Name="login" FontSize="24" Foreground="{DynamicResource text}"/>
+        <DataGrid x:Name="schedule" FontSize="26" Width="500" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto"/>
+    </StackPanel>
+</Window>

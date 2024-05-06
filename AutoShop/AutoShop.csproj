@@ -103,6 +103,7 @@
     <Compile Include="AdditionalClasses\Car.cs" />
     <Compile Include="AdditionalClasses\Client.cs" />
     <Compile Include="AdditionalClasses\Engine.cs" />
+    <Compile Include="AdditionalClasses\Graph.cs" />
     <Compile Include="AdditionalClasses\Model.cs" />
     <Compile Include="AdditionalClasses\Password.cs" />
     <Compile Include="AdditionalClasses\SellCar.cs" />
@@ -145,6 +146,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Forms\Schedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\SellForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +168,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\Schedule.xaml.cs">
+      <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SellForm.xaml.cs">
       <DependentUpon>SellForm.xaml</DependentUpon>
     </Compile>
