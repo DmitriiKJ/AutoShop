@@ -173,5 +173,14 @@ namespace AutoShop.Forms
             Schedule schedule = new Schedule(AutoShop, loginCurrent.Text);
             schedule.ShowDialog();
         }
+
+        private void changeData_Click(object sender, RoutedEventArgs e)
+        {
+            ChangeData change = new ChangeData(AutoShop, false, loginCurrent.Text);
+            change.ShowDialog();
+            Close();
+            WindowForManagers window = new WindowForManagers(loginCurrent.Text, AutoShop, AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == loginCurrent.Text).Field<bool>("Level"));
+            window.ShowDialog();
+        }
     }
 }

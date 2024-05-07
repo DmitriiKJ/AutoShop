@@ -53,7 +53,7 @@
                             </CheckBox>
                         </StackPanel>
 
-                        <Button x:Name="changePassword" Content="Змінити дані" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changePassword_Click" Margin="20"/>
+                        <Button x:Name="changePassword" Content="Змінити пароль" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changePassword_Click" Margin="20"/>
 
                     </StackPanel>
 
@@ -76,6 +76,8 @@
                             </StackPanel>
                         </StackPanel>
                     </Border>
+
+                    <Button x:Name="changeData" Content="Змінити дані" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changeData_Click" Margin="20"/>
 
                 </StackPanel>
                 <StackPanel Width="600" x:Name="table">

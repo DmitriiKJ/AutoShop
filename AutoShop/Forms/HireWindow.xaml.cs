@@ -253,5 +253,10 @@ namespace AutoShop.Forms
             }
             else hire.IsEnabled = false;
         }
+
+        private void date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            TextChanged(null, null);
+        }
     }
 }

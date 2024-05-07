@@ -87,13 +87,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\ChangeData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\ChangePasswordForEmployee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Forms\ChangePasswordForMe.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\FireWindow.xaml">
       <SubType>Designer</SubType>
@@ -137,6 +141,9 @@
     </Compile>
     <Compile Include="Forms\AddModel.xaml.cs">
       <DependentUpon>AddModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ChangeData.xaml.cs">
+      <DependentUpon>ChangeData.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\ChangePasswordForEmployee.xaml.cs">
       <DependentUpon>ChangePasswordForEmployee.xaml</DependentUpon>

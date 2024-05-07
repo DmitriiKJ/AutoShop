@@ -309,6 +309,22 @@ namespace AutoShop.ClassesDB
             }
         }
 
+        public void ChangeManagerData(DataRow m, bool isManager)
+        {
+            try
+            {
+                DataRow row = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<int>("ManagerId") == m.Field<int>("Id"));
+                row["Level"] = isManager;
+                _adapterManagersLevels.Update(_dataSet, "Access");
+                _adapterManagers.Update(_dataSet, "Managers");
+                MessageBox.Show("Дані зменено!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public void ChangePassword(string newPassword, string login)
         {
             DataRow tmp = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == login);
