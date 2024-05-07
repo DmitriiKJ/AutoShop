@@ -6,6 +6,16 @@
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
         Title="WindowForManagers" Height="700" Width="1200" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" WindowState="Maximized">
+    
+    <Window.Resources>
+        <Storyboard x:Key="SlideIn">
+            <DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="600" Duration="0:0:0.3"/>
+        </Storyboard>
+        <Storyboard x:Key="SlideOut">
+            <DoubleAnimation Storyboard.TargetProperty="Width" From="600" To="0" Duration="0:0:0.3"/>
+        </Storyboard>
+    </Window.Resources>
+    
     <StackPanel>
         <Menu>
             <MenuItem Header="Тема">
@@ -15,40 +25,64 @@
         </Menu>
 
         <StackPanel Orientation="Horizontal">
+            <Button x:Name="info" Content="Можливості" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Height="20" Width="80" Click="ToggleMenu" Style="{DynamicResource btn}"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel x:Name="stack" Width="0">
+                    
+                    <Button x:Name="sellCar" Style="{DynamicResource btn}" Width="370" Height="70" Content="Продати машину" Margin="70 20" FontSize="30" Click="sellCar_Click"/>
 
-            <StackPanel>
-                <StackPanel Background="{DynamicResource enable}" Width="500" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Button x:Name="showSchedule" Style="{DynamicResource btn}" Width="370" Height="70" Content="Подивитися графік роботи" Margin="70 20" FontSize="30" Click="showSchedule_Click"/>
+                    
+                    <Button x:Name="hire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Найняти робітника" Margin="70 20" FontSize="30" Click="hire_Click" IsEnabled="False"/>
 
-                    <TextBlock x:Name="loginCurrent" HorizontalAlignment="Center" Margin="5" FontSize="24"/>
+                    <Button x:Name="fire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Звільнити робітника" Margin="70 20" FontSize="30" Click="fire_Click" IsEnabled="False"/>
 
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="Працює зараз:" VerticalAlignment="Center" FontSize="24" Margin="3"/>
-                        <CheckBox x:Name="isWorking" Margin="10 10 0 0">
-                            <CheckBox.LayoutTransform>
-                                <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
-                            </CheckBox.LayoutTransform>
-                        </CheckBox>
+                    <Button x:Name="changePasswordForEmployee" Style="{DynamicResource btn}" Width="370" Height="70" Content="Змінити пароль робітника" Margin="70 20" FontSize="30" Click="changePasswordForEmployee_Click" IsEnabled="False"/>
+                </StackPanel>
+                <StackPanel>
+                    <StackPanel Background="{DynamicResource enable}" Width="500" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+                        <TextBlock x:Name="loginCurrent" HorizontalAlignment="Center" Margin="5" FontSize="24"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock Text="Працює зараз:" VerticalAlignment="Center" FontSize="24" Margin="3"/>
+                            <CheckBox x:Name="isWorking" Margin="10 10 0 0">
+                                <CheckBox.LayoutTransform>
+                                    <ScaleTransform ScaleX="2.5" ScaleY="2.5" />
+                                </CheckBox.LayoutTransform>
+                            </CheckBox>
+                        </StackPanel>
+
+                        <Button x:Name="changePassword" Content="Змінити дані" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changePassword_Click" Margin="20"/>
+
                     </StackPanel>
 
-                    <Button x:Name="changePassword" Content="Змінити пароль" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changePassword_Click" Margin="20"/>
+                    <Border BorderBrush="{DynamicResource text}" BorderThickness="3" Margin="0 20 0 0">
+                        <StackPanel>
+                            
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Ім'я: " Margin="5" FontSize="24" Foreground="{DynamicResource text}"/>
+                                <TextBlock x:Name="name" FontSize="24" Foreground="{DynamicResource text}" Margin="5" TextDecorations="Underline"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Дата народження: " Margin="5" FontSize="24" Foreground="{DynamicResource text}"/>
+                                <TextBlock x:Name="date" FontSize="24" Foreground="{DynamicResource text}" Margin="5" TextDecorations="Underline"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Номер телефону: " Margin="5" FontSize="24" Foreground="{DynamicResource text}"/>
+                                <TextBlock x:Name="phone" FontSize="24" Foreground="{DynamicResource text}" Margin="5" TextDecorations="Underline"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
 
                 </StackPanel>
-
-                <Button x:Name="sellCar" Style="{DynamicResource btn}" Width="370" Height="70" Content="Продати машину" Margin="70 20" FontSize="30" Click="sellCar_Click"/>
-
-                <Button x:Name="showSchedule" Style="{DynamicResource btn}" Width="370" Height="70" Content="Подивитися графік роботи" Margin="70 20" FontSize="30" Click="showSchedule_Click"/>
-
-                <Button x:Name="hire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Найняти робітника" Margin="70 20" FontSize="30" Click="hire_Click" IsEnabled="False"/>
-
-                <Button x:Name="fire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Звільнити робітника" Margin="70 20" FontSize="30" Click="fire_Click" IsEnabled="False"/>
-
-                <Button x:Name="changePasswordForEmployee" Style="{DynamicResource btn}" Width="370" Height="70" Content="Змінити пароль робітника" Margin="70 20" FontSize="30" Click="changePasswordForEmployee_Click" IsEnabled="False"/>
-
-            </StackPanel>
-            <StackPanel>
-                <TextBlock Text="Список проданих автомобілів" Margin="20" FontSize="26" HorizontalAlignment="Center" Foreground="{DynamicResource text}"/>
-                <DataGrid x:Name="listSells" FontSize="26" Width="500" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto">
-                </DataGrid>
+                <StackPanel Width="600" x:Name="table">
+                    <TextBlock Text="Список проданих автомобілів" Margin="20" FontSize="26" HorizontalAlignment="Center" Foreground="{DynamicResource text}"/>
+                    <DataGrid x:Name="listSells" FontSize="26" Width="500" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto">
+                    </DataGrid>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </StackPanel>

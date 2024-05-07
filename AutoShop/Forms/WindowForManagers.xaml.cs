@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -52,8 +53,33 @@ namespace AutoShop.Forms
 
             isWorking.Checked += IsWorking_Checked;
             isWorking.Unchecked += IsWorking_Unchecked;
+
+            DataRow manager = AutoShop._dataSet.Tables["Managers"].AsEnumerable().FirstOrDefault(m => m.Field<int>("Id") == AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == login).Field<int>("ManagerId"));
+
+            name.Text = manager.Field<string>("LastName") + ' ' + manager.Field<string>("FirstName");
+            date.Text = manager.Field<DateTime>("Birthday").ToShortDateString();
+            phone.Text = manager.Field<string>("PhoneNumber");
         }
 
+        private void ToggleMenu(object sender, RoutedEventArgs e)
+        {
+            if (stack.Width == 0)
+            {
+                var slideIn = FindResource("SlideIn") as Storyboard;
+                slideIn?.Begin(stack);
+                var slideOut = FindResource("SlideOut") as Storyboard;
+                slideOut?.Begin(table);
+                info.Content = "Інформація";
+            }
+            else
+            {
+                var slideIn = FindResource("SlideIn") as Storyboard;
+                slideIn?.Begin(table);
+                var slideOut = FindResource("SlideOut") as Storyboard;
+                slideOut?.Begin(stack);
+                info.Content = "Можливості";
+            }
+        }
         private void ShowSellCars()
         {
             List<SellCar> list = new List<SellCar>();
