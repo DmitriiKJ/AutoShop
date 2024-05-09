@@ -38,6 +38,11 @@
                     <Button x:Name="fire" Style="{DynamicResource btn}" Width="370" Height="70" Content="Звільнити робітника" Margin="70 20" FontSize="30" Click="fire_Click" IsEnabled="False"/>
 
                     <Button x:Name="changePasswordForEmployee" Style="{DynamicResource btn}" Width="370" Height="70" Content="Змінити пароль робітника" Margin="70 20" FontSize="30" Click="changePasswordForEmployee_Click" IsEnabled="False"/>
+
+                    <Button x:Name="changeDataForEmployee" Style="{DynamicResource btn}" Width="370" Height="70" Content="Змінити дані робітника" Margin="70 20" FontSize="30" Click="ChangeDataForEmployee_Click" IsEnabled="False"/>
+
+                    <Button x:Name="showEmployeeSchedule" Style="{DynamicResource btn}" Width="370" Height="70" Content="Подивитися графік робітника" Margin="70 20" FontSize="30" Click="ShowEmployeeSchedule_Click" IsEnabled="False"/>
+
                 </StackPanel>
                 <StackPanel>
                     <StackPanel Background="{DynamicResource enable}" Width="500" Height="200" HorizontalAlignment="Left" VerticalAlignment="Top">

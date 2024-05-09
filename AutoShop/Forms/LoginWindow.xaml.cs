@@ -134,7 +134,6 @@ namespace AutoShop.Forms
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 if (Password.ValidatePassword(_tb.Text))

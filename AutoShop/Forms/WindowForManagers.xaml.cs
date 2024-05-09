@@ -38,6 +38,8 @@ namespace AutoShop.Forms
                 fire.IsEnabled = true;
                 hire.IsEnabled = true;
                 changePasswordForEmployee.IsEnabled = true;
+                changeDataForEmployee.IsEnabled = true;
+                showEmployeeSchedule.IsEnabled = true;
             }
 
             DataRow tmp = AutoShop._dataSet.Tables["WorkHistory"].AsEnumerable().FirstOrDefault(h => h.Field<DateTime?>("EndTime") == null && h.Field<int>("ManagerId") == AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == login).Field<int>("ManagerId"));
@@ -178,9 +180,21 @@ namespace AutoShop.Forms
         {
             ChangeData change = new ChangeData(AutoShop, false, loginCurrent.Text);
             change.ShowDialog();
-            Close();
             WindowForManagers window = new WindowForManagers(loginCurrent.Text, AutoShop, AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == loginCurrent.Text).Field<bool>("Level"));
+            Close();
             window.ShowDialog();
+        }
+
+        private void ChangeDataForEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            SelectEmployee select = new SelectEmployee(AutoShop, loginCurrent.Text, false);
+            select.ShowDialog();
+        }
+
+        private void ShowEmployeeSchedule_Click(object sender, RoutedEventArgs e)
+        {
+            SelectEmployee select = new SelectEmployee(AutoShop, loginCurrent.Text, true);
+            select.ShowDialog();
         }
     }
 }

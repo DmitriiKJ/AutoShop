@@ -7,6 +7,13 @@
         mc:Ignorable="d"
         Title="ChangeData" Height="300" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
     <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+        
         <Grid x:Name="newEmployee">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>

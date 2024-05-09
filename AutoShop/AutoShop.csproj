@@ -168,6 +168,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\SelectEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\SellForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,6 +192,9 @@
   <ItemGroup>
     <Compile Include="Forms\Schedule.xaml.cs">
       <DependentUpon>Schedule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SelectEmployee.xaml.cs">
+      <DependentUpon>SelectEmployee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\SellForm.xaml.cs">
       <DependentUpon>SellForm.xaml</DependentUpon>
