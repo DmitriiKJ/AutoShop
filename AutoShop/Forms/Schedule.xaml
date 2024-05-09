@@ -7,7 +7,14 @@
         mc:Ignorable="d"
         Title="Schedule" Height="450" Width="500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
     <StackPanel>
-        <TextBlock x:Name="login" FontSize="24" Foreground="{DynamicResource text}"/>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+        
+        <TextBlock x:Name="login" FontSize="24" Foreground="{DynamicResource text}" HorizontalAlignment="Center"/>
         <DataGrid x:Name="schedule" FontSize="26" Width="500" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto"/>
     </StackPanel>
 </Window>

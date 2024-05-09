@@ -43,5 +43,13 @@ namespace AutoShop.Forms
             }
             schedule.ItemsSource = grafs;
         }
+
+        private void ChangeTheme(object sender, MouseButtonEventArgs e)
+        {
+            ResourceDictionary otherThemeDictionary = new ResourceDictionary();
+            otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
     }
 }

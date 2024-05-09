@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
-        Title="SelectEmployee" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+        Title="SelectEmployee" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
     <StackPanel>
         <Menu>
             <MenuItem Header="Тема">
