@@ -19,6 +19,7 @@
         <TextBlock Text="Автомагазин" FontSize="40" Margin="30" HorizontalAlignment="Center" Foreground="{DynamicResource text}"/>
         <Button x:Name="mainManager" Style="{DynamicResource btn}" Width="400" Height="50" Content="Головний менеджер" FontSize="40" Margin="10" Click="MainManager_Click"/>
         <Button x:Name="manager" Style="{DynamicResource btn}" Width="400" Height="50" Content="Менеджер" FontSize="40" Margin="10" Click="Manager_Click"/>
+        <Button x:Name="history" Style="{DynamicResource btn}" Width="400" Height="50" Content="Історія" FontSize="40" Margin="10" Click="history_Click"/>
 
     </StackPanel>
 </Window>

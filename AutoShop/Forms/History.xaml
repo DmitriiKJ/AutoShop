@@ -1,0 +1,21 @@
+﻿<Window x:Class="AutoShop.Forms.History"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AutoShop.Forms"
+        mc:Ignorable="d"
+        x:Name="window"
+        Title="History" Height="600" Width="1400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}" WindowState="Maximized">
+    <StackPanel>
+        <Menu>
+            <MenuItem Header="Тема">
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
+                <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
+            </MenuItem>
+        </Menu>
+        
+        <TextBlock Text="Історія" FontSize="36" Foreground="{DynamicResource text}" HorizontalAlignment="Center" Margin="5"/>
+        <DataGrid x:Name="historyGrid" ColumnWidth="*" FontSize="24" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>
+    </StackPanel>
+</Window>

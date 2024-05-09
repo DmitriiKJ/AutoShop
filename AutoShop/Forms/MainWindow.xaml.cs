@@ -21,22 +21,22 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class MainWindow : Window
     {
-        private AutoShopDB autoDB;
+        private AutoShopDB AutoShop;
         public MainWindow()
         {
             InitializeComponent();
-            autoDB = new AutoShopDB();
+            AutoShop = new AutoShopDB();
         }
 
         private void MainManager_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow lw = new LoginWindow(true, autoDB);
+            LoginWindow lw = new LoginWindow(true, AutoShop);
             lw.ShowDialog();
         }
 
         private void Manager_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow lw = new LoginWindow(false, autoDB);
+            LoginWindow lw = new LoginWindow(false, AutoShop);
             lw.ShowDialog();
         }
 
@@ -46,6 +46,12 @@ namespace AutoShop.Forms
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void history_Click(object sender, RoutedEventArgs e)
+        {
+            History history = new History(AutoShop);
+            history.ShowDialog();
         }
     }
 }
