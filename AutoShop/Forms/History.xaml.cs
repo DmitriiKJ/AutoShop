@@ -37,6 +37,8 @@ namespace AutoShop.Forms
 
                 DataRow car = AutoShop._dataSet.Tables["Cars"].AsEnumerable().FirstOrDefault(c => c.Field<int>("Id") == row.Field<int>("CarId"));
 
+                DataRow model = AutoShop._dataSet.Tables["Models"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Model") == car.Field<string>("Model"));
+
                 history.Add(new HistoryElement
                 {
                     ManagerFullName = manager.Field<string>("LastName") + ' ' + manager.Field<string>("FirstName") + ' ' + manager.Field<string>("MiddleName"),
@@ -45,7 +47,9 @@ namespace AutoShop.Forms
 
                     CarInfo = car.Field<string>("Model") + ' ' + '(' + car.Field<int>("Year") + ')',
 
-                    DateSell = row.Field<DateTime>("DateBuy")
+                    DateSell = row.Field<DateTime>("DateBuy"),
+
+                    Price = model.Field<decimal>("Price")
                 });
             }
 

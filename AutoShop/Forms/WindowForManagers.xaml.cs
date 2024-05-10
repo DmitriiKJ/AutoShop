@@ -142,7 +142,6 @@ namespace AutoShop.Forms
         {
             ChangePasswordForEmployee password = new ChangePasswordForEmployee(AutoShop);
             password.ShowDialog();
-
         }
 
         private void IsWorking_Checked(object sender, RoutedEventArgs e)
@@ -195,6 +194,44 @@ namespace AutoShop.Forms
         {
             SelectEmployee select = new SelectEmployee(AutoShop, loginCurrent.Text, true);
             select.ShowDialog();
+        }
+
+        private void start_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            end.DisplayDateStart = start.SelectedDate;
+        }
+
+        private void end_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            start.DisplayDateEnd = end.SelectedDate;
+        }
+
+        private void find_Click(object sender, RoutedEventArgs e)
+        {
+            List<SellCar> list = new List<SellCar>();
+
+            var buys = AutoShop._dataSet.Tables["Buys"].AsEnumerable().Where(b => b.Field<int>("ManagerId") == AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == loginCurrent.Text).Field<int>("ManagerId") && b.Field<DateTime>("DateBuy") >= start.SelectedDate && b.Field<DateTime>("DateBuy") <= end.SelectedDate);
+
+            var carsId = buys.Select(b => b.Field<int>("CarId"));
+
+            foreach (int id in carsId)
+            {
+                list.Add(new SellCar
+                {
+                    Model = AutoShop._dataSet.Tables["Cars"].AsEnumerable().FirstOrDefault(c => c.Field<int>("Id") == id).Field<string>("Model"),
+
+                    Brand = AutoShop._dataSet.Tables["Models"].AsEnumerable().FirstOrDefault(m => AutoShop._dataSet.Tables["Cars"].AsEnumerable().FirstOrDefault(c => c.Field<int>("Id") == id).Field<string>("Model") == m.Field<string>("Model")).Field<string>("Brand"),
+
+                    dateSell = buys.FirstOrDefault(b => b.Field<int>("CarId") == id).Field<DateTime>("DateBuy")
+                });
+            }
+
+            listSells.ItemsSource = list;
+        }
+
+        private void all_Click(object sender, RoutedEventArgs e)
+        {
+            ShowSellCars();
         }
     }
 }

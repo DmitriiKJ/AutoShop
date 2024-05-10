@@ -12,5 +12,6 @@ namespace AutoShop.AdditionalClasses
         public string CarInfo {  get; set; }
         public string ClientFullName {  get; set; }
         public DateTime DateSell { get; set; }
+        public decimal Price { get; set; }
     }
 }
