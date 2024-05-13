@@ -23,12 +23,14 @@ namespace AutoShop.Forms
     {
         AutoShopDB AutoShop;
         string _login;
+        string _from;
 
-        public ChangeData(AutoShopDB db, bool FromMain, string _l)
+        public ChangeData(AutoShopDB db, bool FromMain, string _l, string from)
         {
             InitializeComponent();
             _login = _l;
             AutoShop = db;
+            _from = from;
             date.DisplayDateEnd = DateTime.Now.AddYears(-18);
             date.DisplayDateStart = DateTime.Now.AddYears(-100);
 
@@ -89,7 +91,7 @@ namespace AutoShop.Forms
             row["Birthday"] = date.SelectedDate;
 
             bool tmp = isMainManager.IsChecked == true ? true : false;
-            AutoShop.ChangeManagerData(row, tmp);
+            AutoShop.ChangeManagerData(row, tmp, _from);
             Close();
         }
     }

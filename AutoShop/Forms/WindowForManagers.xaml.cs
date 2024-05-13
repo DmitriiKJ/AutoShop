@@ -140,7 +140,7 @@ namespace AutoShop.Forms
 
         private void changePasswordForEmployee_Click(object sender, RoutedEventArgs e)
         {
-            ChangePasswordForEmployee password = new ChangePasswordForEmployee(AutoShop);
+            ChangePasswordForEmployee password = new ChangePasswordForEmployee(AutoShop, loginCurrent.Text);
             password.ShowDialog();
         }
 
@@ -177,7 +177,7 @@ namespace AutoShop.Forms
 
         private void changeData_Click(object sender, RoutedEventArgs e)
         {
-            ChangeData change = new ChangeData(AutoShop, false, loginCurrent.Text);
+            ChangeData change = new ChangeData(AutoShop, false, loginCurrent.Text, loginCurrent.Text);
             change.ShowDialog();
             WindowForManagers window = new WindowForManagers(loginCurrent.Text, AutoShop, AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == loginCurrent.Text).Field<bool>("Level"));
             Close();
@@ -232,6 +232,12 @@ namespace AutoShop.Forms
         private void all_Click(object sender, RoutedEventArgs e)
         {
             ShowSellCars();
+        }
+
+        private void historyOfChanges_Click(object sender, RoutedEventArgs e)
+        {
+            HistoryOfChanges history = new HistoryOfChanges(AutoShop, loginCurrent.Text);
+            history.ShowDialog();
         }
     }
 }

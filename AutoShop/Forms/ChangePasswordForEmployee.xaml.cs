@@ -23,10 +23,12 @@ namespace AutoShop.Forms
     public partial class ChangePasswordForEmployee : Window
     {
         AutoShopDB AutoShop;
-        public ChangePasswordForEmployee(AutoShopDB db)
+        string log;
+        public ChangePasswordForEmployee(AutoShopDB db, string loginManager)
         {
             InitializeComponent();
             AutoShop = db;
+            log = loginManager;
 
             try
             {
@@ -64,7 +66,7 @@ namespace AutoShop.Forms
                 DataRowView selectedRow = (DataRowView)login.SelectedItem;
                 string login1 = selectedRow["Login"].ToString();
 
-                AutoShop.ChangePassword(newP.Text, login1);
+                AutoShop.ChangePassword(newP.Text, login1, log);
                 MessageBox.Show("Пароль змінено!");
                 Close();
             }

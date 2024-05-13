@@ -82,7 +82,9 @@
                         </StackPanel>
                     </Border>
 
-                    <Button x:Name="changeData" Content="Змінити дані" Width="200" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changeData_Click" Margin="20"/>
+                    <Button x:Name="changeData" Content="Змінити дані" Width="230" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="changeData_Click" Margin="20"/>
+
+                    <Button x:Name="historyOfChanges" Content="Історія змін даних" Width="230" FontSize="26" Height="60" Style="{DynamicResource btn}" Click="historyOfChanges_Click" Margin="20"/>
 
                 </StackPanel>
                 <StackPanel Width="700" x:Name="table">
@@ -93,7 +95,12 @@
                         <Button x:Name="find" Content="Шукати" Style="{DynamicResource btn}" Width="70" Height="25" Margin="5" Click="find_Click"/>
                         <Button x:Name="all" Content="Усе" Style="{DynamicResource btn}" Width="70" Height="25" Margin="5" Click="all_Click"/>
                     </StackPanel>
-                    <DataGrid x:Name="listSells" FontSize="26" Width="530" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsReadOnly="True" VerticalScrollBarVisibility="Auto">
+                    <DataGrid x:Name="listSells" FontSize="26" Width="530" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsReadOnly="True" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Модель" Binding="{Binding Model}" />
+                            <DataGridTextColumn Header="Бренд" Binding="{Binding Brand}" />
+                            <DataGridTextColumn Header="Дата" Binding="{Binding dateSell}" />
+                        </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </StackPanel>

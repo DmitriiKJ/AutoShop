@@ -42,7 +42,7 @@ namespace AutoShop.Forms
         {
             if (Password.ValidatePassword(newP.Text))
             {
-                AutoShop.ChangePassword(newP.Text, _login);
+                AutoShop.ChangePassword(newP.Text, _login, _login);
                 Close();
             }
             else

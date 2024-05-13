@@ -14,8 +14,17 @@
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
             </MenuItem>
         </Menu>
-        
+
         <TextBlock Text="Історія" FontSize="36" Foreground="{DynamicResource text}" HorizontalAlignment="Center" Margin="5"/>
-        <DataGrid x:Name="historyGrid" ColumnWidth="*" FontSize="24" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto"/>
+
+        <DataGrid Name="historyGrid" ColumnWidth="*" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" FontSize="24" AutoGenerateColumns="False" Background="{DynamicResource enable}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Ім'я менеджера" Binding="{Binding ManagerFullName}" />
+                <DataGridTextColumn Header="Автомобіль" Binding="{Binding CarInfo}" />
+                <DataGridTextColumn Header="Ім'я клієнта" Binding="{Binding ClientFullName}" />
+                <DataGridTextColumn Header="Дата" Binding="{Binding DateSell}" />
+                <DataGridTextColumn Header="Ціна" Binding="{Binding Price}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </StackPanel>
 </Window>

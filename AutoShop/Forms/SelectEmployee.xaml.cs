@@ -22,10 +22,12 @@ namespace AutoShop.Forms
     public partial class SelectEmployee : Window
     {
         AutoShopDB AutoShop;
+        string from;
         public SelectEmployee(AutoShopDB db, string withoutLogin, bool isSchedule)
         {
             InitializeComponent();
             AutoShop = db;
+            from = withoutLogin;
 
             List<int> workers = AutoShop._dataSet.Tables["Managers"]
                    .AsEnumerable()
@@ -69,7 +71,7 @@ namespace AutoShop.Forms
         {
             DataRowView selectedRow = (DataRowView)login.SelectedItem;
             string login1 = selectedRow["Login"].ToString();
-            ChangeData changeData = new ChangeData(AutoShop, true, login1);
+            ChangeData changeData = new ChangeData(AutoShop, true, login1, from);
             Close();
             changeData.ShowDialog();
         }

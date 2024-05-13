@@ -111,6 +111,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\HistoryOfChanges.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +128,7 @@
     <Compile Include="AdditionalClasses\Engine.cs" />
     <Compile Include="AdditionalClasses\Graph.cs" />
     <Compile Include="AdditionalClasses\HistoryElement.cs" />
+    <Compile Include="AdditionalClasses\HistoryOfChange.cs" />
     <Compile Include="AdditionalClasses\Model.cs" />
     <Compile Include="AdditionalClasses\Password.cs" />
     <Compile Include="AdditionalClasses\SellCar.cs" />
@@ -164,6 +169,9 @@
     </Compile>
     <Compile Include="Forms\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\HistoryOfChanges.xaml.cs">
+      <DependentUpon>HistoryOfChanges.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>

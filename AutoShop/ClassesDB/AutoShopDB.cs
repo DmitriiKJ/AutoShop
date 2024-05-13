@@ -25,6 +25,7 @@ namespace AutoShop.ClassesDB
         private SqlDataAdapter _adapterClients;
         private SqlDataAdapter _adapterEngines;
         private SqlDataAdapter _adapterBrands;
+        private SqlDataAdapter _adapterHistoryOfChanges;
         public AutoShopDB()
         {
             try
@@ -41,6 +42,7 @@ namespace AutoShop.ClassesDB
                 _adapterClients = new SqlDataAdapter("SELECT * FROM Clients;", _connectionString);
                 _adapterEngines = new SqlDataAdapter("SELECT * FROM Engines;", _connectionString);
                 _adapterBrands = new SqlDataAdapter("SELECT * FROM Brands;", _connectionString);
+                _adapterHistoryOfChanges = new SqlDataAdapter("SELECT * FROM HistoryOfChanges;", _connectionString);
 
                 SqlCommandBuilder builder = new SqlCommandBuilder(_adapterHistory);
                 builder = new SqlCommandBuilder(_adapterManagers);
@@ -50,6 +52,7 @@ namespace AutoShop.ClassesDB
                 builder = new SqlCommandBuilder(_adapterModels);
                 builder = new SqlCommandBuilder(_adapterEngines);
                 builder = new SqlCommandBuilder(_adapterBrands);
+                builder = new SqlCommandBuilder(_adapterHistoryOfChanges);
 
                 _adapterManagers.Fill(_dataSet, "Managers");
                 _adapterManagersLevels.Fill(_dataSet, "Access");
@@ -60,6 +63,7 @@ namespace AutoShop.ClassesDB
                 _adapterClients.Fill(_dataSet, "Clients");
                 _adapterEngines.Fill(_dataSet, "Engines");
                 _adapterBrands.Fill(_dataSet, "Brands");
+                _adapterHistoryOfChanges.Fill(_dataSet, "HistoryOfChanges");
             }
             catch (Exception ex)
             {
@@ -82,6 +86,7 @@ namespace AutoShop.ClassesDB
                 _adapterClients.Fill(_dataSet, "Clients");
                 _adapterEngines.Fill(_dataSet, "Engines");
                 _adapterBrands.Fill(_dataSet, "Brands");
+                _adapterHistoryOfChanges.Fill(_dataSet, "HistoryOfChanges");
             }
             catch (Exception ex)
             {
@@ -309,12 +314,22 @@ namespace AutoShop.ClassesDB
             }
         }
 
-        public void ChangeManagerData(DataRow m, bool isManager)
+        public void ChangeManagerData(DataRow m, bool isManager, string loginWho)
         {
             try
             {
                 DataRow row = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<int>("ManagerId") == m.Field<int>("Id"));
+                DataRow change = _dataSet.Tables["HistoryOfChanges"].NewRow();
+
+                change["ManagerWhoChangedId"] = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == loginWho).Field<int>("ManagerId");
+                change["ManagerWhoWasChanged"] = row.Field<int>("ManagerId");
+                change["DateChange"] = DateTime.Now;
+                change["Info"] = "Зміна особистих даних";
+
                 row["Level"] = isManager;
+
+                _dataSet.Tables["HistoryOfChanges"].Rows.Add(change);
+                _adapterHistoryOfChanges.Update(_dataSet, "HistoryOfChanges");
                 _adapterManagersLevels.Update(_dataSet, "Access");
                 _adapterManagers.Update(_dataSet, "Managers");
                 MessageBox.Show("Дані зменено!");
@@ -325,15 +340,29 @@ namespace AutoShop.ClassesDB
             }
         }
 
-        public void ChangePassword(string newPassword, string login)
+        public void ChangePassword(string newPassword, string login, string loginWho)
         {
-            DataRow tmp = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == login);
+            try
+            {
+                DataRow tmp = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == login);
+                DataRow change = _dataSet.Tables["HistoryOfChanges"].NewRow();
 
-            newPassword = Password.SHA1(newPassword + tmp.Field<int>("Salt").ToString());
+                change["ManagerWhoChangedId"] = _dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == loginWho).Field<int>("ManagerId");
+                change["ManagerWhoWasChanged"] = tmp.Field<int>("ManagerId");
+                change["DateChange"] = DateTime.Now;
+                change["Info"] = "Зміна паролю";
+                newPassword = Password.SHA1(newPassword + tmp.Field<int>("Salt").ToString());
+                tmp["Password"] = newPassword;
 
-            tmp["Password"] = newPassword;
-            _adapterManagersLevels.Update(_dataSet, "Access");
-            UpdateAllDataSet();
+                _dataSet.Tables["HistoryOfChanges"].Rows.Add(change);
+                _adapterHistoryOfChanges.Update(_dataSet, "HistoryOfChanges");
+                _adapterManagersLevels.Update(_dataSet, "Access");
+                UpdateAllDataSet();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }
