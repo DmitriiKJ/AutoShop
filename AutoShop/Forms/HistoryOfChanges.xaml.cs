@@ -22,10 +22,12 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class HistoryOfChanges : Window
     {
+        public static HistoryOfChanges Window;
         AutoShopDB AutoShop;
         public HistoryOfChanges(AutoShopDB db, string login)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
 
             int id = AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(m => m.Field<string>("Login") == login).Field<int>("ManagerId");
@@ -49,6 +51,27 @@ namespace AutoShop.Forms
             }
 
             history.ItemsSource = changesList;
+        }
+
+        private void ChangeTheme(object sender, MouseButtonEventArgs e)
+        {
+            ResourceDictionary otherThemeDictionary = new ResourceDictionary();
+            otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                HistoryOfChanges.Window.DragMove();
+            }
         }
     }
 }

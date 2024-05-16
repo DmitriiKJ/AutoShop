@@ -21,13 +21,23 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class ChangePasswordForMe : Window
     {
+        public static ChangePasswordForMe Window;
         private AutoShopDB AutoShop;
         private string _login;
         public ChangePasswordForMe(string login, AutoShopDB db)
         {
             InitializeComponent();
+            Window = this;
             _login = login;
             AutoShop = db;
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                ChangePasswordForMe.Window.DragMove();
+            }
         }
 
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
@@ -36,6 +46,11 @@ namespace AutoShop.Forms
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void change_Click(object sender, RoutedEventArgs e)

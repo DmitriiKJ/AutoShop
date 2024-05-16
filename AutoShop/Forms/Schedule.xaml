@@ -5,15 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
-        Title="Schedule" Height="450" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+        WindowStyle="None"
+        BorderThickness="2"
+        BorderBrush="{DynamicResource enable}"
+        Title="Schedule" Height="450" Width="600" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}" MouseDown="Drag">
     <StackPanel>
-        <Menu>
+        <Menu Background="{DynamicResource enable}" Margin="0 0 20 0">
             <MenuItem Header="Тема">
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
             </MenuItem>
         </Menu>
-        
+        <Button HorizontalAlignment="Right" Content="X" Height="18" Width="20" Style="{DynamicResource btnClose}" Margin="0 -18 0 0" Click="Button_Click"/>
+
         <TextBlock x:Name="login" FontSize="24" Foreground="{DynamicResource text}" HorizontalAlignment="Center"/>
         <DataGrid x:Name="schedule" FontSize="26" Width="550" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" ColumnWidth="*">
             <DataGrid.Columns>

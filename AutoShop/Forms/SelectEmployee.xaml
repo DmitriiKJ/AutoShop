@@ -5,14 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
-        Title="SelectEmployee" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}">
+        WindowStyle="None"
+        BorderThickness="2"
+        BorderBrush="{DynamicResource enable}"
+        Title="SelectEmployee" Height="200" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Background="{DynamicResource back}" MouseDown="Drag">
     <StackPanel>
-        <Menu>
+        <Menu Background="{DynamicResource enable}" Margin="0 0 20 0">
             <MenuItem Header="Тема">
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
             </MenuItem>
         </Menu>
+        <Button HorizontalAlignment="Right" Content="X" Height="18" Width="20" Style="{DynamicResource btnClose}" Margin="0 -18 0 0" Click="Button_Click"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10 30 10 10">
             <TextBlock VerticalAlignment="Center" Text="Логін: " Margin="5" Height="20" Foreground="{DynamicResource text}"/>

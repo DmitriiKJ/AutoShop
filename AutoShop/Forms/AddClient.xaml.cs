@@ -22,11 +22,21 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class AddClient : Window
     {
+        public static AddClient Window;
         AutoShopDB AutoShop;
         public AddClient(AutoShopDB db)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                AddClient.Window.DragMove();
+            }
         }
 
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
@@ -35,6 +45,11 @@ namespace AutoShop.Forms
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void addClient_Click(object sender, RoutedEventArgs e)

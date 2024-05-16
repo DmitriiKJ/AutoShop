@@ -22,6 +22,7 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class AddCar : Window
     {
+        public static AddCar Window;
         AutoShopDB AutoShop;
         private int _year = 2000;
         List<Model> _models;
@@ -29,6 +30,7 @@ namespace AutoShop.Forms
         public AddCar(AutoShopDB dB)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = dB;
             AutoShop.UpdateAllDataSet();
             numeric.Text = _year.ToString();
@@ -43,12 +45,24 @@ namespace AutoShop.Forms
             model.SelectedValuePath = nameof(Model.ModelName);
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                AddCar.Window.DragMove();
+            }
+        }
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void down_Click(object sender, RoutedEventArgs e)

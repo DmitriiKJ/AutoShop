@@ -23,6 +23,7 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class HireWindow : Window
     {
+        public static HireWindow Window;
         AutoShopDB AutoShop;
         private PasswordBox _pb;
         private TextBox _tb;
@@ -58,6 +59,7 @@ namespace AutoShop.Forms
             border.Margin = new Thickness(5);
 
             InitializeComponent();
+            Window = this;
             AutoShop = db;
             newAdd.Checked += new_Checked;
             date.DisplayDateEnd = DateTime.Now.AddYears(-18);
@@ -92,6 +94,27 @@ namespace AutoShop.Forms
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                HireWindow.Window.DragMove();
+            }
+        }
+
+        private void ChangeTheme(object sender, MouseButtonEventArgs e)
+        {
+            ResourceDictionary otherThemeDictionary = new ResourceDictionary();
+            otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

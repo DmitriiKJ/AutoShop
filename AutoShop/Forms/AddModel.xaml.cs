@@ -22,12 +22,14 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class AddModel : Window
     {
+        public static AddModel Window;
         AutoShopDB AutoShop;
         List<Engine> _engines;
         List<string> _brands;
         public AddModel(AutoShopDB db)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
             equipment.Items.Add("Економ");
             equipment.Items.Add("Стандарт");
@@ -49,12 +51,24 @@ namespace AutoShop.Forms
             brand.ItemsSource = _brands;
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                AddModel.Window.DragMove();
+            }
+        }
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void addEngine_Click(object sender, RoutedEventArgs e)

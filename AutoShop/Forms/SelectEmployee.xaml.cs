@@ -21,11 +21,13 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class SelectEmployee : Window
     {
+        public static SelectEmployee Window;
         AutoShopDB AutoShop;
         string from;
         public SelectEmployee(AutoShopDB db, string withoutLogin, bool isSchedule)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
             from = withoutLogin;
 
@@ -45,12 +47,25 @@ namespace AutoShop.Forms
             else btnSelect.Click += btnLogin_ClickData;
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                SelectEmployee.Window.DragMove();
+            }
+        }
+
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void btnLogin_ClickSchedule(object sender, RoutedEventArgs e)

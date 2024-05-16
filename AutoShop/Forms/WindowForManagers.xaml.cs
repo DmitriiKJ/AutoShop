@@ -23,11 +23,13 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class WindowForManagers : Window
     {
+        public static WindowForManagers Window;
         private AutoShopDB AutoShop;
 
         public WindowForManagers(string login, AutoShopDB db, bool isManager)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
             loginCurrent.Text = login;
 
@@ -61,6 +63,14 @@ namespace AutoShop.Forms
             name.Text = manager.Field<string>("LastName") + ' ' + manager.Field<string>("FirstName");
             date.Text = manager.Field<DateTime>("Birthday").ToShortDateString();
             phone.Text = manager.Field<string>("PhoneNumber");
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                WindowForManagers.Window.DragMove();
+            }
         }
 
         private void ToggleMenu(object sender, RoutedEventArgs e)
@@ -111,6 +121,11 @@ namespace AutoShop.Forms
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void changePassword_Click(object sender, RoutedEventArgs e)

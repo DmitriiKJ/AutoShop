@@ -21,19 +21,33 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class AddBrand : Window
     {
+        public static AddBrand Window;
         AutoShopDB AutoShop;
         public AddBrand(AutoShopDB db)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                AddBrand.Window.DragMove();
+            }
+        }
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)

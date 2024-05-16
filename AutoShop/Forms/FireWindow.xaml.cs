@@ -21,10 +21,12 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class FireWindow : Window
     {
+        public static FireWindow Window;
         AutoShopDB AutoShop;
         public FireWindow(AutoShopDB db)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
 
             try
@@ -48,12 +50,25 @@ namespace AutoShop.Forms
             }
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                FireWindow.Window.DragMove();
+            }
+        }
+
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void fire_Click(object sender, RoutedEventArgs e)

@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
-        Title="WindowForManagers" Height="700" Width="1200" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" WindowState="Maximized">
+        WindowStyle="None"
+        BorderThickness="2"
+        BorderBrush="{DynamicResource enable}"
+        Title="WindowForManagers" Height="700" Width="1200" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" WindowState="Maximized" MouseDown="Drag">
     
     <Window.Resources>
         <Storyboard x:Key="SlideIn">
@@ -17,12 +20,13 @@
     </Window.Resources>
     
     <StackPanel>
-        <Menu>
+        <Menu Background="{DynamicResource enable}" Margin="0 0 20 0">
             <MenuItem Header="Тема">
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
             </MenuItem>
         </Menu>
+        <Button HorizontalAlignment="Right" Content="X" Height="18" Width="20" Style="{DynamicResource btnClose}" Margin="0 -18 0 0" Click="Button_Click"/>
 
         <StackPanel Orientation="Horizontal">
             <Button x:Name="info" Content="Можливості" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Height="20" Width="80" Click="ToggleMenu" Style="{DynamicResource btn}"/>

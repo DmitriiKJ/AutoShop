@@ -18,6 +18,7 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class LoginWindow : Window
     {
+        public static LoginWindow Window;
         private Border border = new Border();
         private bool manager;
         private AutoShopDB AutoShop;
@@ -54,6 +55,7 @@ namespace AutoShop.Forms
             border.Margin = new Thickness(5);
 
             InitializeComponent();
+            Window = this;
             manager = isMainManager;
 
             try
@@ -91,6 +93,14 @@ namespace AutoShop.Forms
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if(Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                LoginWindow.Window.DragMove();
             }
         }
 
@@ -209,6 +219,11 @@ namespace AutoShop.Forms
 
             passwordGrid.Children.Clear();
             passwordGrid.Children.Add(border);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 

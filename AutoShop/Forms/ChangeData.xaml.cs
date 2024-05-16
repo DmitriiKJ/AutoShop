@@ -21,6 +21,7 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class ChangeData : Window
     {
+        public static ChangeData Window;
         AutoShopDB AutoShop;
         string _login;
         string _from;
@@ -28,6 +29,7 @@ namespace AutoShop.Forms
         public ChangeData(AutoShopDB db, bool FromMain, string _l, string from)
         {
             InitializeComponent();
+            Window = this;
             _login = _l;
             AutoShop = db;
             _from = from;
@@ -58,12 +60,25 @@ namespace AutoShop.Forms
             }
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                ChangeData.Window.DragMove();
+            }
+        }
+
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void TextChanged(object sender, TextChangedEventArgs e)

@@ -22,6 +22,7 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class SellForm : Window
     {
+        public static SellForm Window;
         AutoShopDB AutoShop;
         private string CurrentManagerLogin;
         List<Client> _clients;
@@ -29,6 +30,7 @@ namespace AutoShop.Forms
         public SellForm(AutoShopDB db, string login)
         {
             InitializeComponent();
+            Window = this;
             AutoShop = db;
             CurrentManagerLogin = login;
             currentManager.Text = CurrentManagerLogin;
@@ -56,12 +58,25 @@ namespace AutoShop.Forms
             cars.SelectedValuePath = nameof(Car.Id);
         }
 
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                SellForm.Window.DragMove();
+            }
+        }
+
         private void ChangeTheme(object sender, MouseButtonEventArgs e)
         {
             ResourceDictionary otherThemeDictionary = new ResourceDictionary();
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void addClient_Click(object sender, RoutedEventArgs e)

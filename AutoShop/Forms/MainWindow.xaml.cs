@@ -21,11 +21,21 @@ namespace AutoShop.Forms
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Window;
         private AutoShopDB AutoShop;
         public MainWindow()
         {
             InitializeComponent();
+            Window = this;
             AutoShop = new AutoShopDB();
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            {
+                MainWindow.Window.DragMove();
+            }
         }
 
         private void MainManager_Click(object sender, RoutedEventArgs e)
@@ -46,6 +56,11 @@ namespace AutoShop.Forms
             otherThemeDictionary.Source = new Uri("Styles/" + (sender as TextBlock).Tag.ToString() + "Style.xaml", UriKind.RelativeOrAbsolute);
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(otherThemeDictionary);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         private void history_Click(object sender, RoutedEventArgs e)

@@ -5,15 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AutoShop.Forms"
         mc:Ignorable="d"
-        Title="SellForm" Height="450" Width="700" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" ResizeMode="NoResize">
+        WindowStyle="None"
+        BorderThickness="2"
+        BorderBrush="{DynamicResource enable}"
+        Title="SellForm" Height="450" Width="700" WindowStartupLocation="CenterScreen" Background="{DynamicResource back}" ResizeMode="NoResize" MouseDown="Drag">
     <StackPanel>
-        <Menu>
+        <Menu Background="{DynamicResource enable}" Margin="0 0 20 0">
             <MenuItem Header="Тема">
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Dark">Темна</TextBlock>
                 <TextBlock MouseLeftButtonDown="ChangeTheme" Tag="Light">Яскрава</TextBlock>
             </MenuItem>
         </Menu>
-        
+        <Button HorizontalAlignment="Right" Content="X" Height="18" Width="20" Style="{DynamicResource btnClose}" Margin="0 -18 0 0" Click="Button_Click"/>
+
         <TextBlock Background="{DynamicResource enable}" Width="300" Height="50" HorizontalAlignment="Left" Text="Продажа автомобіля" FontSize="20" FontWeight="Bold" TextAlignment="Center" Padding="10"/>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="40">
