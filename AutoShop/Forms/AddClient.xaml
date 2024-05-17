@@ -37,7 +37,7 @@
 
             <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
                 <TextBlock Text="Номер: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
-                <TextBox x:Name="phoneNumber" Style="{DynamicResource textBox}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
+                <TextBox x:Name="phoneNumber" Style="{DynamicResource textBoxNumber}" Width="300" HorizontalAlignment="Right" DockPanel.Dock="Right" TextBoxBase.TextChanged="TextChanged"/>
             </DockPanel>
 
             <DockPanel HorizontalAlignment="Center" Width="450" Margin="20">
