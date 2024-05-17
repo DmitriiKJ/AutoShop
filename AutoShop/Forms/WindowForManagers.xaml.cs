@@ -213,11 +213,13 @@ namespace AutoShop.Forms
 
         private void start_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (start.SelectedDate > end.SelectedDate) start.SelectedDate = end.SelectedDate;
             end.DisplayDateStart = start.SelectedDate;
         }
 
         private void end_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (end.SelectedDate < start.SelectedDate) end.SelectedDate = start.SelectedDate;
             start.DisplayDateEnd = end.SelectedDate;
         }
 

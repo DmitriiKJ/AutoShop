@@ -83,10 +83,10 @@ namespace AutoShop.Forms
 
         private void TextChanged(object sender, TextChangedEventArgs e)
         {
-                if (!string.IsNullOrWhiteSpace(first.Text) && !string.IsNullOrWhiteSpace(last.Text) && !string.IsNullOrWhiteSpace(middle.Text) && !string.IsNullOrWhiteSpace(phoneNumber.Text) && date.SelectedDate != null)
-                {
-                    change.IsEnabled = true;
-                }
+            if (!string.IsNullOrWhiteSpace(first.Text) && !string.IsNullOrWhiteSpace(last.Text) && !string.IsNullOrWhiteSpace(middle.Text) && !string.IsNullOrWhiteSpace(phoneNumber.Text) && date.SelectedDate != null)
+            {
+                change.IsEnabled = true;
+            }
         }
 
         private void date_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -96,6 +96,11 @@ namespace AutoShop.Forms
 
         private void change_Click(object sender, RoutedEventArgs e)
         {
+            if(date.SelectedDate > DateTime.Now.AddYears(-18) || date.SelectedDate < DateTime.Now.AddYears(-100)) 
+            {
+                MessageBox.Show("Вибрана дата не є можливою!");
+                return;
+            }
             int id = AutoShop._dataSet.Tables["Access"].AsEnumerable().FirstOrDefault(a => a.Field<string>("Login") == _login).Field<int>("ManagerId");
             DataRow row = AutoShop._dataSet.Tables["Managers"].AsEnumerable().FirstOrDefault(m => m.Field<int>("Id") == id);
 

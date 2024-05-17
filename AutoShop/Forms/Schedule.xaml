@@ -22,7 +22,7 @@
         <DataGrid x:Name="schedule" FontSize="26" Width="550" Margin="50 20 50 0" Height="300" Background="{DynamicResource enable}" IsEnabled="False" VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" ColumnWidth="*">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date}" />
-                <DataGridTextColumn Header="Відпрацьований час" Binding="{Binding Time}" />
+                <DataGridTextColumn Header="Відпрацьовано" Binding="{Binding Time}" />
             </DataGrid.Columns>
         </DataGrid>
     </StackPanel>

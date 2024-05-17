@@ -91,7 +91,7 @@ namespace AutoShop.Forms
             DataRow row = AutoShop._dataSet.Tables["Models"].NewRow();
             row["Model"] = model.Text;
             row["Equipment"] = equipment.Text;
-            row["Price"] = Convert.ToDouble(price.Text);
+            row["Price"] = Convert.ToDecimal(price.Text);
             row["EngineModel"] = engine.SelectedValue;
             row["Brand"] = brand.SelectedValue;
 
