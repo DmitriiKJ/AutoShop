@@ -25,6 +25,7 @@ namespace AutoShop.Forms
         public static AddCar Window;
         AutoShopDB AutoShop;
         private int _year = 2000;
+        private int _count = 1;
         List<Model> _models;
 
         public AddCar(AutoShopDB dB)
@@ -34,6 +35,7 @@ namespace AutoShop.Forms
             AutoShop = dB;
             AutoShop.UpdateAllDataSet();
             numeric.Text = _year.ToString();
+            count.Text = _count.ToString();
 
             _models = AutoShop._dataSet.Tables["Models"].AsEnumerable().Select(m => new Model
             {
@@ -97,13 +99,18 @@ namespace AutoShop.Forms
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
-            DataRow row = AutoShop._dataSet.Tables["Cars"].NewRow();
-            row["Model"] = model.SelectedValue;
-            row["Year"] = _year;
+            for (int i = 1; i <= _count; i++)
+            {
+                DataRow row = AutoShop._dataSet.Tables["Cars"].NewRow();
+                row["Model"] = model.SelectedValue;
+                row["Year"] = _year;
 
-            AutoShop.AddCar(row);
+                AutoShop.AddCar(row);
+            }
 
-            MessageBox.Show("Автомобіль успішно додано!");
+            
+            if(_count == 1) MessageBox.Show("Автомобіль успішно додано!");
+            else MessageBox.Show("Автомобілі успішно додано!");
             Close();
         }
 
@@ -111,6 +118,24 @@ namespace AutoShop.Forms
         {
             if (model.SelectedIndex != -1) add.IsEnabled = true;
             else add.IsEnabled = false;
+        }
+
+        private void _up_Click(object sender, RoutedEventArgs e)
+        {
+            if (_count < 10)
+            {
+                _count++;
+                count.Text = _count.ToString();
+            }
+        }
+
+        private void _down_Click(object sender, RoutedEventArgs e)
+        {
+            if (_count > 1)
+            {
+                _count--;
+                count.Text = _count.ToString();
+            }
         }
     }
 }

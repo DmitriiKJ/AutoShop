@@ -26,14 +26,25 @@
                 <Button x:Name="addModel" Content="Нова модель" Width="170" Style="{DynamicResource btn}" Margin="10 0 0 0" Click="addModel_Click"/>
             </StackPanel>
 
-            <DockPanel HorizontalAlignment="Left" Width="230" Margin="60 20">
-                <TextBlock Text="Рік: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
-                <TextBox x:Name="numeric" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Text="" Width="50" Height="30" Background="{DynamicResource enable}" Margin="20 0"/>
-                <StackPanel Orientation="Horizontal" Margin="-50 0 0 0" Width="80">
-                    <Button x:Name="up" Content="+1" Width="30" Height="20" Margin="10 0" Click="up_Click" Style="{DynamicResource btn}"/>
-                    <Button x:Name="down" Content="-1" Width="30" Height="20" Click="down_Click" Style="{DynamicResource btn}"/>
-                </StackPanel>
-            </DockPanel>
+            <StackPanel Orientation="Horizontal">
+                <DockPanel HorizontalAlignment="Left" Width="230" Margin="60 20">
+                    <TextBlock Text="Рік: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                    <TextBox x:Name="numeric" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Text="" Width="50" Height="30" Background="{DynamicResource enable}" Margin="20 0"/>
+                    <StackPanel Orientation="Horizontal" Margin="-50 0 0 0" Width="80">
+                        <Button x:Name="up" Content="+1" Width="30" Height="20" Margin="10 0" Click="up_Click" Style="{DynamicResource btn}"/>
+                        <Button x:Name="down" Content="-1" Width="30" Height="20" Click="down_Click" Style="{DynamicResource btn}"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <DockPanel HorizontalAlignment="Left" Width="300" Margin="60 20">
+                    <TextBlock Text="Кількість: " Foreground="{DynamicResource text}" FontSize="20" HorizontalAlignment="Left" DockPanel.Dock="Left"/>
+                    <TextBox x:Name="count" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" Text="" Width="50" Height="30" Background="{DynamicResource enable}" Margin="20 0"/>
+                    <StackPanel Orientation="Horizontal" Margin="-50 0 0 0" Width="80">
+                        <Button x:Name="_up" Content="+1" Width="30" Height="20" Margin="10 0" Click="_up_Click" Style="{DynamicResource btn}"/>
+                        <Button x:Name="_down" Content="-1" Width="30" Height="20" Click="_down_Click" Style="{DynamicResource btn}"/>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
         </StackPanel>
 
         <Button x:Name="add" Content="Додати" HorizontalAlignment="Center" Style="{DynamicResource btn}" Width="100" Height="30" Click="add_Click" IsEnabled="False"/>
