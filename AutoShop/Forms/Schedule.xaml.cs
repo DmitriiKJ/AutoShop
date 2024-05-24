@@ -39,7 +39,7 @@ namespace AutoShop.Forms
                 Graph graf = new Graph { Date = g.Key, Time = TimeSpan.Zero };
                 foreach (var s in g)
                 {
-                    graf.Time += (s.Field<DateTime>("EndTime") - s.Field<DateTime>("StartTime"));
+                    graf.Time += new TimeSpan((s.Field<DateTime>("EndTime") - s.Field<DateTime>("StartTime")).Days, (s.Field<DateTime>("EndTime") - s.Field<DateTime>("StartTime")).Hours, (s.Field<DateTime>("EndTime") - s.Field<DateTime>("StartTime")).Minutes, (s.Field<DateTime>("EndTime") - s.Field<DateTime>("StartTime")).Seconds);
                 }
                 grafs.Add(graf);
             }
