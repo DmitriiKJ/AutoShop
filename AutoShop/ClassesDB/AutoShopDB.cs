@@ -358,6 +358,7 @@ namespace AutoShop.ClassesDB
                 _adapterHistoryOfChanges.Update(_dataSet, "HistoryOfChanges");
                 _adapterManagersLevels.Update(_dataSet, "Access");
                 UpdateAllDataSet();
+                MessageBox.Show("Пароль змінено!");
             }
             catch (Exception ex)
             {

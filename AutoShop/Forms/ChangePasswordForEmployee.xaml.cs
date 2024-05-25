@@ -82,7 +82,6 @@ namespace AutoShop.Forms
                 string login1 = selectedRow["Login"].ToString();
 
                 AutoShop.ChangePassword(newP.Text, login1, log);
-                MessageBox.Show("Пароль змінено!");
                 Close();
             }
             else
